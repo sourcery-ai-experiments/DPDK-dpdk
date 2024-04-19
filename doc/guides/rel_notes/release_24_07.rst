@@ -73,6 +73,10 @@ New Features
   ``bpf_obj_get()`` for an xskmap pinned (by the AF_XDP DP) inside the
   container.
 
+* **Updated Wangxun ngbe driver.**
+
+  * Added SSE/NEON vector datapath.
+
 * **Updated Wangxun txgbe driver.**
 
   * Added SSE/NEON vector datapath.
