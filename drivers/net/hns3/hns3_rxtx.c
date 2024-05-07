@@ -86,9 +86,14 @@ hns3_rx_queue_release(void *queue)
 	struct hns3_rx_queue *rxq = queue;
 	if (rxq) {
 		hns3_rx_queue_release_mbufs(rxq);
-		if (rxq->mz)
+		if (rxq->mz) {
 			rte_memzone_free(rxq->mz);
-		rte_free(rxq->sw_ring);
+			rxq->mz = NULL;
+		}
+		if (rxq->sw_ring) {
+			rte_free(rxq->sw_ring);
+			rxq->sw_ring = NULL;
+		}
 		rte_free(rxq);
 	}
 }
@@ -99,10 +104,18 @@ hns3_tx_queue_release(void *queue)
 	struct hns3_tx_queue *txq = queue;
 	if (txq) {
 		hns3_tx_queue_release_mbufs(txq);
-		if (txq->mz)
+		if (txq->mz) {
 			rte_memzone_free(txq->mz);
-		rte_free(txq->sw_ring);
-		rte_free(txq->free);
+			txq->mz = NULL;
+		}
+		if (txq->sw_ring) {
+			rte_free(txq->sw_ring);
+			txq->sw_ring = NULL;
+		}
+		if (txq->free) {
+			rte_free(txq->free);
+			txq->free = NULL;
+		}
 		rte_free(txq);
 	}
 }
@@ -2389,8 +2402,7 @@ hns3_rx_ptp_timestamp_handle(struct hns3_rx_queue *rxq, struct rte_mbuf *mbuf,
 {
 	struct hns3_pf *pf = HNS3_DEV_PRIVATE_TO_PF(rxq->hns);
 
-	mbuf->ol_flags |= RTE_MBUF_F_RX_IEEE1588_PTP |
-			  RTE_MBUF_F_RX_IEEE1588_TMST;
+	mbuf->ol_flags |= RTE_MBUF_F_RX_IEEE1588_TMST;
 	if (hns3_timestamp_rx_dynflag > 0) {
 		*RTE_MBUF_DYNFIELD(mbuf, hns3_timestamp_dynfield_offset,
 			rte_mbuf_timestamp_t *) = timestamp;
@@ -2669,6 +2681,7 @@ hns3_recv_scattered_pkts(void *rx_queue,
 			continue;
 		}
 
+		first_seg->ol_flags = 0;
 		if (unlikely(bd_base_info & BIT(HNS3_RXD_TS_VLD_B)))
 			hns3_rx_ptp_timestamp_handle(rxq, first_seg, timestamp);
 
@@ -2698,7 +2711,7 @@ hns3_recv_scattered_pkts(void *rx_queue,
 
 		first_seg->port = rxq->port_id;
 		first_seg->hash.rss = rte_le_to_cpu_32(rxd.rx.rss_hash);
-		first_seg->ol_flags = RTE_MBUF_F_RX_RSS_HASH;
+		first_seg->ol_flags |= RTE_MBUF_F_RX_RSS_HASH;
 		if (unlikely(bd_base_info & BIT(HNS3_RXD_LUM_B))) {
 			first_seg->hash.fdir.hi =
 				rte_le_to_cpu_16(rxd.rx.fd_id);
