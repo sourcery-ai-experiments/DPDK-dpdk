@@ -29,7 +29,7 @@ pydocstyle = "6.1.1"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.961"
-black = "^22.6.0"
+black = "^24.3.0"
 isort = "^5.10.1"
 pylama = "^8.4.1"
 pyflakes = "^2.5.0"
