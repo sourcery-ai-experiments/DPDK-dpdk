@@ -32,53 +32,53 @@
 					 HNS3_RSS_SUPPORT_L3L4)
 
 enum hns3_tuple_field {
-	/* IPV4_TCP ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV4_TCP_EN_TCP_D = 0,
-	HNS3_RSS_FIELD_IPV4_TCP_EN_TCP_S,
-	HNS3_RSS_FIELD_IPV4_TCP_EN_IP_D,
-	HNS3_RSS_FIELD_IPV4_TCP_EN_IP_S,
+    /* IPV4_TCP ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV4_TCP_EN_TCP_D = 0,
+    HNS3_RSS_FIELD_IPV4_TCP_EN_TCP_S,
+    HNS3_RSS_FIELD_IPV4_TCP_EN_IP_D,
+    HNS3_RSS_FIELD_IPV4_TCP_EN_IP_S,
 
-	/* IPV4_UDP ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV4_UDP_EN_UDP_D = 8,
-	HNS3_RSS_FIELD_IPV4_UDP_EN_UDP_S,
-	HNS3_RSS_FIELD_IPV4_UDP_EN_IP_D,
-	HNS3_RSS_FIELD_IPV4_UDP_EN_IP_S,
+    /* IPV4_UDP ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV4_UDP_EN_UDP_D = 8,
+    HNS3_RSS_FIELD_IPV4_UDP_EN_UDP_S,
+    HNS3_RSS_FIELD_IPV4_UDP_EN_IP_D,
+    HNS3_RSS_FIELD_IPV4_UDP_EN_IP_S,
 
-	/* IPV4_SCTP ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV4_SCTP_EN_SCTP_D = 16,
-	HNS3_RSS_FIELD_IPV4_SCTP_EN_SCTP_S,
-	HNS3_RSS_FIELD_IPV4_SCTP_EN_IP_D,
-	HNS3_RSS_FIELD_IPV4_SCTP_EN_IP_S,
+    /* IPV4_SCTP ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV4_SCTP_EN_SCTP_D = 16,
+    HNS3_RSS_FIELD_IPV4_SCTP_EN_SCTP_S,
+    HNS3_RSS_FIELD_IPV4_SCTP_EN_IP_D,
+    HNS3_RSS_FIELD_IPV4_SCTP_EN_IP_S,
 
-	/* IPV4 ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV4_EN_NONFRAG_IP_D = 24,
-	HNS3_RSS_FIELD_IPV4_EN_NONFRAG_IP_S,
-	HNS3_RSS_FIELD_IPV4_EN_FRAG_IP_D,
-	HNS3_RSS_FIELD_IPV4_EN_FRAG_IP_S,
+    /* IPV4 ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV4_EN_NONFRAG_IP_D = 24,
+    HNS3_RSS_FIELD_IPV4_EN_NONFRAG_IP_S,
+    HNS3_RSS_FIELD_IPV4_EN_FRAG_IP_D,
+    HNS3_RSS_FIELD_IPV4_EN_FRAG_IP_S,
 
-	/* IPV6_TCP ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV6_TCP_EN_TCP_D = 32,
-	HNS3_RSS_FIELD_IPV6_TCP_EN_TCP_S,
-	HNS3_RSS_FIELD_IPV6_TCP_EN_IP_D,
-	HNS3_RSS_FIELD_IPV6_TCP_EN_IP_S,
+    /* IPV6_TCP ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV6_TCP_EN_TCP_D = 32,
+    HNS3_RSS_FIELD_IPV6_TCP_EN_TCP_S,
+    HNS3_RSS_FIELD_IPV6_TCP_EN_IP_D,
+    HNS3_RSS_FIELD_IPV6_TCP_EN_IP_S,
 
-	/* IPV6_UDP ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV6_UDP_EN_UDP_D = 40,
-	HNS3_RSS_FIELD_IPV6_UDP_EN_UDP_S,
-	HNS3_RSS_FIELD_IPV6_UDP_EN_IP_D,
-	HNS3_RSS_FIELD_IPV6_UDP_EN_IP_S,
+    /* IPV6_UDP ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV6_UDP_EN_UDP_D = 40,
+    HNS3_RSS_FIELD_IPV6_UDP_EN_UDP_S,
+    HNS3_RSS_FIELD_IPV6_UDP_EN_IP_D,
+    HNS3_RSS_FIELD_IPV6_UDP_EN_IP_S,
 
-	/* IPV6_SCTP ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV6_SCTP_EN_SCTP_D = 48,
-	HNS3_RSS_FIELD_IPV6_SCTP_EN_SCTP_S,
-	HNS3_RSS_FIELD_IPV6_SCTP_EN_IP_D,
-	HNS3_RSS_FIELD_IPV6_SCTP_EN_IP_S,
+    /* IPV6_SCTP ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV6_SCTP_EN_SCTP_D = 48,
+    HNS3_RSS_FIELD_IPV6_SCTP_EN_SCTP_S,
+    HNS3_RSS_FIELD_IPV6_SCTP_EN_IP_D,
+    HNS3_RSS_FIELD_IPV6_SCTP_EN_IP_S,
 
-	/* IPV6 ENABLE FIELD */
-	HNS3_RSS_FIELD_IPV6_NONFRAG_IP_D = 56,
-	HNS3_RSS_FIELD_IPV6_NONFRAG_IP_S,
-	HNS3_RSS_FIELD_IPV6_FRAG_IP_D,
-	HNS3_RSS_FIELD_IPV6_FRAG_IP_S
+    /* IPV6 ENABLE FIELD */
+    HNS3_RSS_FIELD_IPV6_NONFRAG_IP_D = 56,
+    HNS3_RSS_FIELD_IPV6_NONFRAG_IP_S,
+    HNS3_RSS_FIELD_IPV6_FRAG_IP_D,
+    HNS3_RSS_FIELD_IPV6_FRAG_IP_S
 };
 
 #define HNS3_RSS_PCTYPE_IPV4_TCP	BIT_ULL(0)
@@ -117,50 +117,50 @@ enum hns3_tuple_field {
 /* Same as the Max queue num under TC */
 #define HNS3_RSS_QUEUES_BUFFER_NUM	512
 struct hns3_rss_conf {
-	uint64_t rss_hf;
-	uint8_t hash_algo; /* hash function type defined by hardware */
-	uint8_t key[HNS3_RSS_KEY_SIZE_MAX];  /* Hash key */
-	uint16_t rss_indirection_tbl[HNS3_RSS_IND_TBL_SIZE_MAX];
-	/*
-	 * For IPv6 SCTP packets type, check whether the NIC hardware support
-	 * RSS hash using the src/dst port as the input tuple. For Kunpeng920
-	 * NIC hardware, it is not supported
-	 */
-	bool ipv6_sctp_offload_supported;
+    uint64_t rss_hf;
+    uint8_t hash_algo; /* hash function type defined by hardware */
+    uint8_t key[HNS3_RSS_KEY_SIZE_MAX];  /* Hash key */
+    uint16_t rss_indirection_tbl[HNS3_RSS_IND_TBL_SIZE_MAX];
+    /*
+     * For IPv6 SCTP packets type, check whether the NIC hardware support
+     * RSS hash using the src/dst port as the input tuple. For Kunpeng920
+     * NIC hardware, it is not supported
+     */
+    bool ipv6_sctp_offload_supported;
 };
 
 #ifndef ilog2
 static inline int rss_ilog2(uint32_t x)
 {
-	int log = 0;
-	x >>= 1;
+    int log = 0;
+    x >>= 1;
 
-	while (x) {
-		log++;
-		x >>= 1;
-	}
-	return log;
+    while (x) {
+        log++;
+        x >>= 1;
+    }
+    return log;
 }
 #define ilog2(x) rss_ilog2(x)
 #endif
 
 static inline uint32_t fls(uint32_t x)
 {
-	uint32_t position;
-	uint32_t i;
+    uint32_t position;
+    uint32_t i;
 
-	if (x == 0)
-		return 0;
+    if (x == 0)
+        return 0;
 
-	for (i = (x >> 1), position = 0; i != 0; ++position)
-		i >>= 1;
+    for (i = (x >> 1), position = 0; i != 0; ++position)
+        i >>= 1;
 
-	return position + 1;
+    return position + 1;
 }
 
 static inline uint32_t roundup_pow_of_two(uint32_t x)
 {
-	return 1UL << fls(x - 1);
+    return 1UL << fls(x - 1);
 }
 
 extern const uint8_t hns3_hash_key[HNS3_RSS_KEY_SIZE];
@@ -169,18 +169,18 @@ struct hns3_adapter;
 struct hns3_hw;
 
 int hns3_dev_rss_hash_update(struct rte_eth_dev *dev,
-			     struct rte_eth_rss_conf *rss_conf);
+                             struct rte_eth_rss_conf *rss_conf);
 int hns3_dev_rss_hash_conf_get(struct rte_eth_dev *dev,
-			       struct rte_eth_rss_conf *rss_conf);
+                               struct rte_eth_rss_conf *rss_conf);
 int hns3_dev_rss_reta_update(struct rte_eth_dev *dev,
-			     struct rte_eth_rss_reta_entry64 *reta_conf,
-			     uint16_t reta_size);
+                             struct rte_eth_rss_reta_entry64 *reta_conf,
+                             uint16_t reta_size);
 int hns3_dev_rss_reta_query(struct rte_eth_dev *dev,
-			    struct rte_eth_rss_reta_entry64 *reta_conf,
-			    uint16_t reta_size);
+                            struct rte_eth_rss_reta_entry64 *reta_conf,
+                            uint16_t reta_size);
 void hns3_rss_set_default_args(struct hns3_hw *hw);
 int hns3_set_rss_indir_table(struct hns3_hw *hw, uint16_t *indir,
-			     uint16_t size);
+                             uint16_t size);
 int hns3_rss_reset_indir_table(struct hns3_hw *hw);
 int hns3_config_rss(struct hns3_adapter *hns);
 void hns3_rss_uninit(struct hns3_adapter *hns);
@@ -190,6 +190,6 @@ int hns3_set_rss_tuple_field(struct hns3_hw *hw, uint64_t tuple_fields);
 int hns3_get_rss_tuple_field(struct hns3_hw *hw, uint64_t *tuple_fields);
 uint64_t hns3_rss_calc_tuple_filed(uint64_t rss_hf);
 int hns3_update_rss_algo_key(struct hns3_hw *hw, uint8_t hash_algo,
-			     uint8_t *key, uint8_t key_len);
+                             uint8_t *key, uint8_t key_len);
 
 #endif /* HNS3_RSS_H */

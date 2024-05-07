@@ -51,47 +51,47 @@
 
 /* structure for interrupt relative data */
 struct ngbe_interrupt {
-	uint32_t flags;
-	uint32_t mask_misc;
-	uint32_t mask_misc_orig; /* save mask during delayed handler */
-	uint64_t mask;
-	uint64_t mask_orig; /* save mask during delayed handler */
+    uint32_t flags;
+    uint32_t mask_misc;
+    uint32_t mask_misc_orig; /* save mask during delayed handler */
+    uint64_t mask;
+    uint64_t mask_orig; /* save mask during delayed handler */
 };
 
 #define NGBE_NB_STAT_MAPPING  32
 #define NB_QMAP_FIELDS_PER_QSM_REG 4
 #define QMAP_FIELD_RESERVED_BITS_MASK 0x0f
 struct ngbe_stat_mappings {
-	uint32_t tqsm[NGBE_NB_STAT_MAPPING];
-	uint32_t rqsm[NGBE_NB_STAT_MAPPING];
+    uint32_t tqsm[NGBE_NB_STAT_MAPPING];
+    uint32_t rqsm[NGBE_NB_STAT_MAPPING];
 };
 
 struct ngbe_vfta {
-	uint32_t vfta[NGBE_VFTA_SIZE];
+    uint32_t vfta[NGBE_VFTA_SIZE];
 };
 
 struct ngbe_hwstrip {
-	uint32_t bitmap[NGBE_HWSTRIP_BITMAP_SIZE];
+    uint32_t bitmap[NGBE_HWSTRIP_BITMAP_SIZE];
 };
 
 /**
  * Response sent back to ngbe driver from user app after callback
  */
 enum ngbe_mb_event_rsp {
-	NGBE_MB_EVENT_NOOP_ACK,  /**< skip mbox request and ACK */
-	NGBE_MB_EVENT_NOOP_NACK, /**< skip mbox request and NACK */
-	NGBE_MB_EVENT_PROCEED,  /**< proceed with mbox request  */
-	NGBE_MB_EVENT_MAX       /**< max value of this enum */
+    NGBE_MB_EVENT_NOOP_ACK,  /**< skip mbox request and ACK */
+    NGBE_MB_EVENT_NOOP_NACK, /**< skip mbox request and NACK */
+    NGBE_MB_EVENT_PROCEED,  /**< proceed with mbox request  */
+    NGBE_MB_EVENT_MAX       /**< max value of this enum */
 };
 
 /**
  * Data sent to the user application when the callback is executed.
  */
 struct ngbe_mb_event_param {
-	uint16_t vfid;     /**< Virtual Function number */
-	uint16_t msg_type; /**< VF to PF message type, defined in ngbe_mbx.h */
-	uint16_t retval;   /**< return value */
-	void *msg;         /**< pointer to message */
+    uint16_t vfid;     /**< Virtual Function number */
+    uint16_t msg_type; /**< VF to PF message type, defined in ngbe_mbx.h */
+    uint16_t retval;   /**< return value */
+    void *msg;         /**< pointer to message */
 };
 
 /*
@@ -100,60 +100,60 @@ struct ngbe_mb_event_param {
 #define NGBE_MAX_VF_MC_ENTRIES      30
 
 struct ngbe_uta_info {
-	uint8_t  uc_filter_type;
-	uint16_t uta_in_use;
-	uint32_t uta_shadow[NGBE_MAX_UTA];
+    uint8_t  uc_filter_type;
+    uint16_t uta_in_use;
+    uint32_t uta_shadow[NGBE_MAX_UTA];
 };
 
 struct ngbe_vf_info {
-	uint8_t vf_mac_addresses[RTE_ETHER_ADDR_LEN];
-	uint16_t vf_mc_hashes[NGBE_MAX_VF_MC_ENTRIES];
-	uint16_t num_vf_mc_hashes;
-	bool clear_to_send;
-	uint16_t vlan_count;
-	uint8_t api_version;
-	uint16_t switch_domain_id;
-	uint16_t xcast_mode;
-	uint16_t mac_count;
+    uint8_t vf_mac_addresses[RTE_ETHER_ADDR_LEN];
+    uint16_t vf_mc_hashes[NGBE_MAX_VF_MC_ENTRIES];
+    uint16_t num_vf_mc_hashes;
+    bool clear_to_send;
+    uint16_t vlan_count;
+    uint8_t api_version;
+    uint16_t switch_domain_id;
+    uint16_t xcast_mode;
+    uint16_t mac_count;
 };
 
 /*
  * Structure to store private data for each driver instance (for each port).
  */
 struct ngbe_adapter {
-	struct ngbe_hw             hw;
-	struct ngbe_hw_stats       stats;
-	struct ngbe_interrupt      intr;
-	struct ngbe_stat_mappings  stat_mappings;
-	struct ngbe_vfta           shadow_vfta;
-	struct ngbe_hwstrip        hwstrip;
-	struct ngbe_vf_info        *vfdata;
-	struct ngbe_uta_info       uta_info;
-	bool                       rx_bulk_alloc_allowed;
-	bool                       rx_vec_allowed;
-	struct rte_timecounter     systime_tc;
-	struct rte_timecounter     rx_tstamp_tc;
-	struct rte_timecounter     tx_tstamp_tc;
+    struct ngbe_hw             hw;
+    struct ngbe_hw_stats       stats;
+    struct ngbe_interrupt      intr;
+    struct ngbe_stat_mappings  stat_mappings;
+    struct ngbe_vfta           shadow_vfta;
+    struct ngbe_hwstrip        hwstrip;
+    struct ngbe_vf_info        *vfdata;
+    struct ngbe_uta_info       uta_info;
+    bool                       rx_bulk_alloc_allowed;
+    bool                       rx_vec_allowed;
+    struct rte_timecounter     systime_tc;
+    struct rte_timecounter     rx_tstamp_tc;
+    struct rte_timecounter     tx_tstamp_tc;
 
-	/* For RSS reta table update */
-	uint8_t rss_reta_updated;
+    /* For RSS reta table update */
+    uint8_t rss_reta_updated;
 };
 
 static inline struct ngbe_adapter *
 ngbe_dev_adapter(struct rte_eth_dev *dev)
 {
-	struct ngbe_adapter *ad = dev->data->dev_private;
+    struct ngbe_adapter *ad = dev->data->dev_private;
 
-	return ad;
+    return ad;
 }
 
 static inline struct ngbe_hw *
 ngbe_dev_hw(struct rte_eth_dev *dev)
 {
-	struct ngbe_adapter *ad = ngbe_dev_adapter(dev);
-	struct ngbe_hw *hw = &ad->hw;
+    struct ngbe_adapter *ad = ngbe_dev_adapter(dev);
+    struct ngbe_hw *hw = &ad->hw;
 
-	return hw;
+    return hw;
 }
 
 #define NGBE_DEV_STATS(dev) \
@@ -162,10 +162,10 @@ ngbe_dev_hw(struct rte_eth_dev *dev)
 static inline struct ngbe_interrupt *
 ngbe_dev_intr(struct rte_eth_dev *dev)
 {
-	struct ngbe_adapter *ad = ngbe_dev_adapter(dev);
-	struct ngbe_interrupt *intr = &ad->intr;
+    struct ngbe_adapter *ad = ngbe_dev_adapter(dev);
+    struct ngbe_interrupt *intr = &ad->intr;
 
-	return intr;
+    return intr;
 }
 
 #define NGBE_DEV_STAT_MAPPINGS(dev) \
@@ -195,13 +195,13 @@ void ngbe_dev_rx_queue_release(struct rte_eth_dev *dev, uint16_t qid);
 void ngbe_dev_tx_queue_release(struct rte_eth_dev *dev, uint16_t qid);
 
 int  ngbe_dev_rx_queue_setup(struct rte_eth_dev *dev, uint16_t rx_queue_id,
-		uint16_t nb_rx_desc, unsigned int socket_id,
-		const struct rte_eth_rxconf *rx_conf,
-		struct rte_mempool *mb_pool);
+                             uint16_t nb_rx_desc, unsigned int socket_id,
+                             const struct rte_eth_rxconf *rx_conf,
+                             struct rte_mempool *mb_pool);
 
 int  ngbe_dev_tx_queue_setup(struct rte_eth_dev *dev, uint16_t tx_queue_id,
-		uint16_t nb_tx_desc, unsigned int socket_id,
-		const struct rte_eth_txconf *tx_conf);
+                             uint16_t nb_tx_desc, unsigned int socket_id,
+                             const struct rte_eth_txconf *tx_conf);
 
 uint32_t ngbe_dev_rx_queue_count(void *rx_queue);
 
@@ -228,52 +228,52 @@ int ngbe_dev_tx_queue_start(struct rte_eth_dev *dev, uint16_t tx_queue_id);
 int ngbe_dev_tx_queue_stop(struct rte_eth_dev *dev, uint16_t tx_queue_id);
 
 void ngbe_rxq_info_get(struct rte_eth_dev *dev, uint16_t queue_id,
-	struct rte_eth_rxq_info *qinfo);
+                       struct rte_eth_rxq_info *qinfo);
 
 void ngbe_txq_info_get(struct rte_eth_dev *dev, uint16_t queue_id,
-	struct rte_eth_txq_info *qinfo);
+                       struct rte_eth_txq_info *qinfo);
 
 int
 ngbe_rx_burst_mode_get(struct rte_eth_dev *dev, __rte_unused uint16_t queue_id,
-		      struct rte_eth_burst_mode *mode);
+                       struct rte_eth_burst_mode *mode);
 int
 ngbe_tx_burst_mode_get(struct rte_eth_dev *dev, __rte_unused uint16_t queue_id,
-		      struct rte_eth_burst_mode *mode);
+                       struct rte_eth_burst_mode *mode);
 
 uint16_t ngbe_recv_pkts(void *rx_queue, struct rte_mbuf **rx_pkts,
-		uint16_t nb_pkts);
+                        uint16_t nb_pkts);
 
 uint16_t ngbe_recv_pkts_bulk_alloc(void *rx_queue, struct rte_mbuf **rx_pkts,
-				    uint16_t nb_pkts);
+                                   uint16_t nb_pkts);
 
 uint16_t ngbe_recv_pkts_sc_single_alloc(void *rx_queue,
-		struct rte_mbuf **rx_pkts, uint16_t nb_pkts);
+                                        struct rte_mbuf **rx_pkts, uint16_t nb_pkts);
 uint16_t ngbe_recv_pkts_sc_bulk_alloc(void *rx_queue,
-		struct rte_mbuf **rx_pkts, uint16_t nb_pkts);
+                                      struct rte_mbuf **rx_pkts, uint16_t nb_pkts);
 
 uint16_t ngbe_xmit_pkts(void *tx_queue, struct rte_mbuf **tx_pkts,
-		uint16_t nb_pkts);
+                        uint16_t nb_pkts);
 
 uint16_t ngbe_xmit_pkts_simple(void *tx_queue, struct rte_mbuf **tx_pkts,
-		uint16_t nb_pkts);
+                               uint16_t nb_pkts);
 
 uint16_t ngbe_prep_pkts(void *tx_queue, struct rte_mbuf **tx_pkts,
-		uint16_t nb_pkts);
+                        uint16_t nb_pkts);
 
 int ngbe_dev_rss_hash_update(struct rte_eth_dev *dev,
-			      struct rte_eth_rss_conf *rss_conf);
+                             struct rte_eth_rss_conf *rss_conf);
 
 int ngbe_dev_rss_hash_conf_get(struct rte_eth_dev *dev,
-				struct rte_eth_rss_conf *rss_conf);
+                               struct rte_eth_rss_conf *rss_conf);
 
 void ngbe_set_ivar_map(struct ngbe_hw *hw, int8_t direction,
-			       uint8_t queue, uint8_t msix_vector);
+                       uint8_t queue, uint8_t msix_vector);
 
 void ngbe_configure_port(struct rte_eth_dev *dev);
 
 int
 ngbe_dev_link_update_share(struct rte_eth_dev *dev,
-		int wait_to_complete);
+                           int wait_to_complete);
 
 /*
  * misc function prototypes
@@ -325,26 +325,26 @@ int ngbe_pf_host_configure(struct rte_eth_dev *eth_dev);
 
 /* store statistics names and its offset in stats structure */
 struct rte_ngbe_xstats_name_off {
-	char name[RTE_ETH_XSTATS_NAME_SIZE];
-	unsigned int offset;
+    char name[RTE_ETH_XSTATS_NAME_SIZE];
+    unsigned int offset;
 };
 
 const uint32_t *ngbe_dev_supported_ptypes_get(struct rte_eth_dev *dev,
-					      size_t *no_of_elements);
+        size_t *no_of_elements);
 int ngbe_dev_set_mc_addr_list(struct rte_eth_dev *dev,
-				      struct rte_ether_addr *mc_addr_set,
-				      uint32_t nb_mc_addr);
+                              struct rte_ether_addr *mc_addr_set,
+                              uint32_t nb_mc_addr);
 int ngbe_dev_rss_reta_update(struct rte_eth_dev *dev,
-			struct rte_eth_rss_reta_entry64 *reta_conf,
-			uint16_t reta_size);
+                             struct rte_eth_rss_reta_entry64 *reta_conf,
+                             uint16_t reta_size);
 int ngbe_dev_rss_reta_query(struct rte_eth_dev *dev,
-			struct rte_eth_rss_reta_entry64 *reta_conf,
-			uint16_t reta_size);
+                            struct rte_eth_rss_reta_entry64 *reta_conf,
+                            uint16_t reta_size);
 void ngbe_vlan_hw_strip_bitmap_set(struct rte_eth_dev *dev,
-		uint16_t queue, bool on);
+                                   uint16_t queue, bool on);
 void ngbe_config_vlan_strip_on_all_queues(struct rte_eth_dev *dev,
-						  int mask);
+        int mask);
 void ngbe_read_stats_registers(struct ngbe_hw *hw,
-			   struct ngbe_hw_stats *hw_stats);
+                               struct ngbe_hw_stats *hw_stats);
 
 #endif /* _NGBE_ETHDEV_H_ */

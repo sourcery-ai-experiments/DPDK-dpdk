@@ -10,37 +10,37 @@
  * Receive Descriptor
  *****************************************************************************/
 struct ngbe_rx_desc {
-	struct {
-		union {
-			rte_le32_t dw0;
-			struct {
-				rte_le16_t pkt;
-				rte_le16_t hdr;
-			} lo;
-		};
-		union {
-			rte_le32_t dw1;
-			struct {
-				rte_le16_t ipid;
-				rte_le16_t csum;
-			} hi;
-		};
-	} qw0; /* also as r.pkt_addr */
-	struct {
-		union {
-			rte_le32_t dw2;
-			struct {
-				rte_le32_t status;
-			} lo;
-		};
-		union {
-			rte_le32_t dw3;
-			struct {
-				rte_le16_t len;
-				rte_le16_t tag;
-			} hi;
-		};
-	} qw1; /* also as r.hdr_addr */
+    struct {
+        union {
+            rte_le32_t dw0;
+            struct {
+                rte_le16_t pkt;
+                rte_le16_t hdr;
+            } lo;
+        };
+        union {
+            rte_le32_t dw1;
+            struct {
+                rte_le16_t ipid;
+                rte_le16_t csum;
+            } hi;
+        };
+    } qw0; /* also as r.pkt_addr */
+    struct {
+        union {
+            rte_le32_t dw2;
+            struct {
+                rte_le32_t status;
+            } lo;
+        };
+        union {
+            rte_le32_t dw3;
+            struct {
+                rte_le16_t len;
+                rte_le16_t tag;
+            } hi;
+        };
+    } qw1; /* also as r.hdr_addr */
 };
 
 /* @ngbe_rx_desc.qw0 */
@@ -129,10 +129,10 @@ struct ngbe_rx_desc {
  * Transmit Context Descriptor (NGBE_TXD_TYP=CTXT)
  **/
 struct ngbe_tx_ctx_desc {
-	rte_le32_t dw0; /* w.vlan_macip_lens  */
-	rte_le32_t dw1; /* w.seqnum_seed      */
-	rte_le32_t dw2; /* w.type_tucmd_mlhl  */
-	rte_le32_t dw3; /* w.mss_l4len_idx    */
+    rte_le32_t dw0; /* w.vlan_macip_lens  */
+    rte_le32_t dw1; /* w.seqnum_seed      */
+    rte_le32_t dw2; /* w.type_tucmd_mlhl  */
+    rte_le32_t dw3; /* w.mss_l4len_idx    */
 };
 
 /* @ngbe_tx_ctx_desc.dw0 */
@@ -169,9 +169,9 @@ struct ngbe_tx_ctx_desc {
  * Transmit Data Descriptor (NGBE_TXD_TYP=DATA)
  **/
 struct ngbe_tx_desc {
-	rte_le64_t qw0; /* r.buffer_addr ,  w.reserved    */
-	rte_le32_t dw2; /* r.cmd_type_len,  w.nxtseq_seed */
-	rte_le32_t dw3; /* r.olinfo_status, w.status      */
+    rte_le64_t qw0; /* r.buffer_addr ,  w.reserved    */
+    rte_le32_t dw2; /* r.cmd_type_len,  w.nxtseq_seed */
+    rte_le32_t dw3; /* r.olinfo_status, w.status      */
 };
 
 /* @ngbe_tx_desc.dw2 */
@@ -223,162 +223,162 @@ struct ngbe_tx_desc {
  * Structure associated with each descriptor of the Rx ring of a Rx queue.
  */
 struct ngbe_rx_entry {
-	struct rte_mbuf *mbuf; /**< mbuf associated with Rx descriptor. */
+    struct rte_mbuf *mbuf; /**< mbuf associated with Rx descriptor. */
 };
 
 struct ngbe_scattered_rx_entry {
-	struct rte_mbuf *fbuf; /**< First segment of the fragmented packet. */
+    struct rte_mbuf *fbuf; /**< First segment of the fragmented packet. */
 };
 
 /**
  * Structure associated with each descriptor of the Tx ring of a Tx queue.
  */
 struct ngbe_tx_entry {
-	struct rte_mbuf *mbuf; /**< mbuf associated with Tx desc, if any. */
-	uint16_t next_id; /**< Index of next descriptor in ring. */
-	uint16_t last_id; /**< Index of last scattered descriptor. */
+    struct rte_mbuf *mbuf; /**< mbuf associated with Tx desc, if any. */
+    uint16_t next_id; /**< Index of next descriptor in ring. */
+    uint16_t last_id; /**< Index of last scattered descriptor. */
 };
 
 /**
  * Structure associated with each descriptor of the Tx ring of a Tx queue.
  */
 struct ngbe_tx_entry_v {
-	struct rte_mbuf *mbuf; /**< mbuf associated with Tx desc, if any. */
+    struct rte_mbuf *mbuf; /**< mbuf associated with Tx desc, if any. */
 };
 
 /**
  * Structure associated with each Rx queue.
  */
 struct ngbe_rx_queue {
-	struct rte_mempool   *mb_pool; /**< mbuf pool to populate Rx ring */
-	uint64_t             rx_ring_phys_addr; /**< Rx ring DMA address */
-	volatile uint32_t    *rdt_reg_addr; /**< RDT register address */
-	volatile uint32_t    *rdh_reg_addr; /**< RDH register address */
+    struct rte_mempool   *mb_pool; /**< mbuf pool to populate Rx ring */
+    uint64_t             rx_ring_phys_addr; /**< Rx ring DMA address */
+    volatile uint32_t    *rdt_reg_addr; /**< RDT register address */
+    volatile uint32_t    *rdh_reg_addr; /**< RDH register address */
 
-	volatile struct ngbe_rx_desc   *rx_ring; /**< Rx ring virtual address */
-	/** address of Rx software ring */
-	struct ngbe_rx_entry           *sw_ring;
-	/** address of scattered Rx software ring */
-	struct ngbe_scattered_rx_entry *sw_sc_ring;
+    volatile struct ngbe_rx_desc   *rx_ring; /**< Rx ring virtual address */
+    /** address of Rx software ring */
+    struct ngbe_rx_entry           *sw_ring;
+    /** address of scattered Rx software ring */
+    struct ngbe_scattered_rx_entry *sw_sc_ring;
 
-	struct rte_mbuf *pkt_first_seg; /**< First segment of current packet */
-	struct rte_mbuf *pkt_last_seg; /**< Last segment of current packet */
-	uint64_t        mbuf_initializer; /**< value to init mbufs */
-	uint16_t        nb_rx_desc; /**< number of Rx descriptors */
-	uint16_t        rx_tail;  /**< current value of RDT register */
-	uint16_t        nb_rx_hold; /**< number of held free Rx desc */
+    struct rte_mbuf *pkt_first_seg; /**< First segment of current packet */
+    struct rte_mbuf *pkt_last_seg; /**< Last segment of current packet */
+    uint64_t        mbuf_initializer; /**< value to init mbufs */
+    uint16_t        nb_rx_desc; /**< number of Rx descriptors */
+    uint16_t        rx_tail;  /**< current value of RDT register */
+    uint16_t        nb_rx_hold; /**< number of held free Rx desc */
 
-	uint16_t rx_nb_avail; /**< nr of staged pkts ready to ret to app */
-	uint16_t rx_next_avail; /**< idx of next staged pkt to ret to app */
-	uint16_t rx_free_trigger; /**< triggers rx buffer allocation */
+    uint16_t rx_nb_avail; /**< nr of staged pkts ready to ret to app */
+    uint16_t rx_next_avail; /**< idx of next staged pkt to ret to app */
+    uint16_t rx_free_trigger; /**< triggers rx buffer allocation */
 
-	uint8_t         rx_using_sse;   /**< indicates that vector Rx is in use */
+    uint8_t         rx_using_sse;   /**< indicates that vector Rx is in use */
 #if defined(RTE_ARCH_X86) || defined(RTE_ARCH_ARM)
-	uint16_t        rxrearm_nb;     /**< number of remaining to be re-armed */
-	uint16_t        rxrearm_start;  /**< the idx we start the re-arming from */
+    uint16_t        rxrearm_nb;     /**< number of remaining to be re-armed */
+    uint16_t        rxrearm_start;  /**< the idx we start the re-arming from */
 #endif
-	uint16_t        rx_free_thresh; /**< max free Rx desc to hold */
-	uint16_t        queue_id; /**< RX queue index */
-	uint16_t        reg_idx;  /**< RX queue register index */
-	uint16_t        port_id;  /**< Device port identifier */
-	uint8_t         crc_len;  /**< 0 if CRC stripped, 4 otherwise. */
-	uint8_t         drop_en;  /**< If not 0, set SRRCTL.Drop_En */
-	uint8_t         rx_deferred_start; /**< not in global dev start */
-	/** flags to set in mbuf when a vlan is detected */
-	uint64_t        vlan_flags;
-	uint64_t	offloads; /**< Rx offloads with RTE_ETH_RX_OFFLOAD_* */
-	/** need to alloc dummy mbuf, for wraparound when scanning hw ring */
-	struct rte_mbuf fake_mbuf;
-	/** hold packets to return to application */
-	struct rte_mbuf *rx_stage[RTE_PMD_NGBE_RX_MAX_BURST * 2];
+    uint16_t        rx_free_thresh; /**< max free Rx desc to hold */
+    uint16_t        queue_id; /**< RX queue index */
+    uint16_t        reg_idx;  /**< RX queue register index */
+    uint16_t        port_id;  /**< Device port identifier */
+    uint8_t         crc_len;  /**< 0 if CRC stripped, 4 otherwise. */
+    uint8_t         drop_en;  /**< If not 0, set SRRCTL.Drop_En */
+    uint8_t         rx_deferred_start; /**< not in global dev start */
+    /** flags to set in mbuf when a vlan is detected */
+    uint64_t        vlan_flags;
+    uint64_t	offloads; /**< Rx offloads with RTE_ETH_RX_OFFLOAD_* */
+    /** need to alloc dummy mbuf, for wraparound when scanning hw ring */
+    struct rte_mbuf fake_mbuf;
+    /** hold packets to return to application */
+    struct rte_mbuf *rx_stage[RTE_PMD_NGBE_RX_MAX_BURST * 2];
 };
 
 /**
  * NGBE CTX Constants
  */
 enum ngbe_ctx_num {
-	NGBE_CTX_0    = 0, /**< CTX0 */
-	NGBE_CTX_1    = 1, /**< CTX1  */
-	NGBE_CTX_NUM  = 2, /**< CTX NUMBER  */
+    NGBE_CTX_0    = 0, /**< CTX0 */
+    NGBE_CTX_1    = 1, /**< CTX1  */
+    NGBE_CTX_NUM  = 2, /**< CTX NUMBER  */
 };
 
 /** Offload features */
 union ngbe_tx_offload {
-	uint64_t data[2];
-	struct {
-		uint64_t ptid:8; /**< Packet Type Identifier. */
-		uint64_t l2_len:7; /**< L2 (MAC) Header Length. */
-		uint64_t l3_len:9; /**< L3 (IP) Header Length. */
-		uint64_t l4_len:8; /**< L4 (TCP/UDP) Header Length. */
-		uint64_t tso_segsz:16; /**< TCP TSO segment size */
-		uint64_t vlan_tci:16;
-		/**< VLAN Tag Control Identifier (CPU order). */
+    uint64_t data[2];
+    struct {
+        uint64_t ptid:8; /**< Packet Type Identifier. */
+        uint64_t l2_len:7; /**< L2 (MAC) Header Length. */
+        uint64_t l3_len:9; /**< L3 (IP) Header Length. */
+        uint64_t l4_len:8; /**< L4 (TCP/UDP) Header Length. */
+        uint64_t tso_segsz:16; /**< TCP TSO segment size */
+        uint64_t vlan_tci:16;
+        /**< VLAN Tag Control Identifier (CPU order). */
 
-		/* fields for TX offloading of tunnels */
-		uint64_t outer_tun_len:8; /**< Outer TUN (Tunnel) Hdr Length. */
-		uint64_t outer_l2_len:8; /**< Outer L2 (MAC) Hdr Length. */
-		uint64_t outer_l3_len:16; /**< Outer L3 (IP) Hdr Length. */
-	};
+        /* fields for TX offloading of tunnels */
+        uint64_t outer_tun_len:8; /**< Outer TUN (Tunnel) Hdr Length. */
+        uint64_t outer_l2_len:8; /**< Outer L2 (MAC) Hdr Length. */
+        uint64_t outer_l3_len:16; /**< Outer L3 (IP) Hdr Length. */
+    };
 };
 
 /**
  * Structure to check if new context need be built
  */
 struct ngbe_ctx_info {
-	uint64_t flags;           /**< ol_flags for context build. */
-	/**< tx offload: vlan, tso, l2-l3-l4 lengths. */
-	union ngbe_tx_offload tx_offload;
-	/** compare mask for tx offload. */
-	union ngbe_tx_offload tx_offload_mask;
+    uint64_t flags;           /**< ol_flags for context build. */
+    /**< tx offload: vlan, tso, l2-l3-l4 lengths. */
+    union ngbe_tx_offload tx_offload;
+    /** compare mask for tx offload. */
+    union ngbe_tx_offload tx_offload_mask;
 };
 
 /**
  * Structure associated with each Tx queue.
  */
 struct ngbe_tx_queue {
-	/** Tx ring virtual address */
-	volatile struct ngbe_tx_desc *tx_ring;
+    /** Tx ring virtual address */
+    volatile struct ngbe_tx_desc *tx_ring;
 
-	uint64_t             tx_ring_phys_addr; /**< Tx ring DMA address */
-	union {
-		/**< address of SW ring for scalar PMD. */
-		struct ngbe_tx_entry *sw_ring;
-		/**< address of SW ring for vector PMD */
-		struct ngbe_tx_entry_v *sw_ring_v;
-	};
-	volatile uint32_t    *tdt_reg_addr; /**< Address of TDT register */
-	volatile uint32_t    *tdc_reg_addr; /**< Address of TDC register */
-	uint16_t             nb_tx_desc;    /**< number of Tx descriptors */
-	uint16_t             tx_tail;       /**< current value of TDT reg */
-	/**
-	 * Start freeing Tx buffers if there are less free descriptors than
-	 * this value.
-	 */
-	uint16_t             tx_free_thresh;
-	/** Index to last Tx descriptor to have been cleaned */
-	uint16_t             last_desc_cleaned;
-	/** Total number of Tx descriptors ready to be allocated */
-	uint16_t             nb_tx_free;
-	uint16_t             tx_next_dd;    /**< next desc to scan for DD bit */
-	uint16_t             queue_id;      /**< Tx queue index */
-	uint16_t             reg_idx;       /**< Tx queue register index */
-	uint16_t             port_id;       /**< Device port identifier */
-	uint8_t              pthresh;       /**< Prefetch threshold register */
-	uint8_t              hthresh;       /**< Host threshold register */
-	uint8_t              wthresh;       /**< Write-back threshold reg */
-	uint64_t             offloads;      /**< Tx offload flags */
-	uint32_t             ctx_curr;      /**< Hardware context states */
-	/** Hardware context0 history */
-	struct ngbe_ctx_info ctx_cache[NGBE_CTX_NUM];
-	uint8_t              tx_deferred_start; /**< not in global dev start */
+    uint64_t             tx_ring_phys_addr; /**< Tx ring DMA address */
+    union {
+        /**< address of SW ring for scalar PMD. */
+        struct ngbe_tx_entry *sw_ring;
+        /**< address of SW ring for vector PMD */
+        struct ngbe_tx_entry_v *sw_ring_v;
+    };
+    volatile uint32_t    *tdt_reg_addr; /**< Address of TDT register */
+    volatile uint32_t    *tdc_reg_addr; /**< Address of TDC register */
+    uint16_t             nb_tx_desc;    /**< number of Tx descriptors */
+    uint16_t             tx_tail;       /**< current value of TDT reg */
+    /**
+     * Start freeing Tx buffers if there are less free descriptors than
+     * this value.
+     */
+    uint16_t             tx_free_thresh;
+    /** Index to last Tx descriptor to have been cleaned */
+    uint16_t             last_desc_cleaned;
+    /** Total number of Tx descriptors ready to be allocated */
+    uint16_t             nb_tx_free;
+    uint16_t             tx_next_dd;    /**< next desc to scan for DD bit */
+    uint16_t             queue_id;      /**< Tx queue index */
+    uint16_t             reg_idx;       /**< Tx queue register index */
+    uint16_t             port_id;       /**< Device port identifier */
+    uint8_t              pthresh;       /**< Prefetch threshold register */
+    uint8_t              hthresh;       /**< Host threshold register */
+    uint8_t              wthresh;       /**< Write-back threshold reg */
+    uint64_t             offloads;      /**< Tx offload flags */
+    uint32_t             ctx_curr;      /**< Hardware context states */
+    /** Hardware context0 history */
+    struct ngbe_ctx_info ctx_cache[NGBE_CTX_NUM];
+    uint8_t              tx_deferred_start; /**< not in global dev start */
 
-	const struct ngbe_txq_ops *ops;       /**< txq ops */
+    const struct ngbe_txq_ops *ops;       /**< txq ops */
 };
 
 struct ngbe_txq_ops {
-	void (*release_mbufs)(struct ngbe_tx_queue *txq);
-	void (*free_swring)(struct ngbe_tx_queue *txq);
-	void (*reset)(struct ngbe_tx_queue *txq);
+    void (*release_mbufs)(struct ngbe_tx_queue *txq);
+    void (*free_swring)(struct ngbe_tx_queue *txq);
+    void (*reset)(struct ngbe_tx_queue *txq);
 };
 
 /* Takes an ethdev and a queue and sets up the tx function to be used based on
@@ -389,14 +389,14 @@ void ngbe_set_tx_function(struct rte_eth_dev *dev, struct ngbe_tx_queue *txq);
 
 void ngbe_set_rx_function(struct rte_eth_dev *dev);
 uint16_t ngbe_recv_pkts_vec(void *rx_queue, struct rte_mbuf **rx_pkts,
-			    uint16_t nb_pkts);
+                            uint16_t nb_pkts);
 uint16_t ngbe_recv_scattered_pkts_vec(void *rx_queue,
-		struct rte_mbuf **rx_pkts, uint16_t nb_pkts);
+                                      struct rte_mbuf **rx_pkts, uint16_t nb_pkts);
 int ngbe_rx_vec_dev_conf_condition_check(struct rte_eth_dev *dev);
 int ngbe_rxq_vec_setup(struct ngbe_rx_queue *rxq);
 void ngbe_rx_queue_release_mbufs_vec(struct ngbe_rx_queue *rxq);
 uint16_t ngbe_xmit_fixed_burst_vec(void *tx_queue, struct rte_mbuf **tx_pkts,
-				   uint16_t nb_pkts);
+                                   uint16_t nb_pkts);
 int ngbe_txq_vec_setup(struct ngbe_tx_queue *txq);
 int ngbe_dev_tx_done_cleanup(void *tx_queue, uint32_t free_cnt);
 
