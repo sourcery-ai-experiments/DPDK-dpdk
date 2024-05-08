@@ -55,6 +55,32 @@ New Features
      Also, make sure to start the actual text at the margin.
      =======================================================
 
+* **Enabled AF_XDP PMD multi interface (UDS) support with AF_XDP Device Plugin**.
+
+  The EAL vdev argument for the AF_XDP PMD ``use_cni`` previously limited
+  a pod to using only a single netdev/interface. The latest changes (adding
+  the ``dp_path`` parameter) remove this limitation and maintain backward
+  compatibility for any applications already using the ``use_cni`` vdev
+  argument with the AF_XDP Device Plugin.
+
+* **Integrated AF_XDP PMD with AF_XDP Device Plugin eBPF map pinning support**.
+
+  The EAL vdev argument for the AF_XDP PMD ``use_map_pinning`` was added
+  to allow Kubernetes Pods to use AF_XDP with DPDK, and run  with limited
+  privileges, without having to do a full handshake over a Unix Domain
+  Socket with the Device Plugin. This flag indicates that the AF_XDP PMD
+  will be used in unprivileged mode and will obtain the XSKMAP FD by calling
+  ``bpf_obj_get()`` for an xskmap pinned (by the AF_XDP DP) inside the
+  container.
+
+* **Updated Wangxun ngbe driver.**
+
+  * Added SSE/NEON vector datapath.
+
+* **Updated Wangxun txgbe driver.**
+
+  * Added SSE/NEON vector datapath.
+
 
 Removed Items
 -------------
